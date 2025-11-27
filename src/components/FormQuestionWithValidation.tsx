@@ -93,9 +93,10 @@ export function FormQuestionWithValidation({
     onChange(newValue);
     setValue(question.id as keyof FormData, newValue);
     // Trigger validation after a short delay
-    setTimeout(() => {
-      trigger(question.id as keyof FormData);
-    }, 300);
+   
+
+
+
   };
 
   const slideVariants = {

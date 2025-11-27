@@ -173,12 +173,9 @@ const Index = () => {
     const answer = answers[currentQuestion.id];
 
     // Basic validation for empty required fields
+    console.log(currentQuestion.required, answer, "🟢");
     if (currentQuestion.required && (!answer || answer.trim() === "")) {
-      toast({
-        title: "Required Field",
-        description: "Please answer this question before continuing.",
-        variant: "destructive",
-      });
+     
       return;
     }
 
@@ -205,6 +202,37 @@ const Index = () => {
       setCurrentQuestionIndex((prev) => prev - 1);
     }
   };
+  const [ip, setIp] = useState("");
+  const [locationData, setLocationData] = useState<any>(null);
+
+  useEffect(() => {
+    const currentQuestion = questions[currentQuestionIndex];
+    if (currentQuestion.type === "select") {
+      handleNext();
+    }
+  }, [answers]);
+  // useEffect(() => {
+  //   const fetchIpAndLocation = async () => {
+  //     try {
+  //       const res = await fetch("https://ipapi.co/json/");
+  //       const data = await res.json();
+  //       console.log(data, "🟢");
+  //       setIp(data.ip);
+  //       setLocationData({
+  //         city: data.city,
+  //         region: data.region,
+  //         country: data.country_name,
+  //         latitude: data.latitude,
+  //         longitude: data.longitude,
+  //         timezone: data.timezone,
+  //       });
+  //     } catch (error) {
+  //       console.log("Location fetch error:", error);
+  //     }
+  //   };
+
+  //   fetchIpAndLocation();
+  // }, []);
 
   const [loading, setLoading] = useState(false);
 
@@ -228,6 +256,15 @@ const Index = () => {
           ClassroomFacilities: answers.classroomFacilities,
           RecommendAcademy: answers.recommendAcademy,
           AdditionalFeedback: answers.additionalFeedback,
+          // i need devise ip and device details
+          // IP: locationData.ip,
+          // Device: locationData.device,
+          // City: locationData.city,
+          // Region: locationData.region,
+          // Country: locationData.country,
+          // Latitude: locationData.latitude,
+          // Longitude: locationData.longitude,
+          // Timezone: locationData.timezone,
         }),
       });
       toast({
